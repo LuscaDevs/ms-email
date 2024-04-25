@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Processo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td {
+            color: #555;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+
+        li strong {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Detalhes do Processo</h2>
+    <table>
+        <tr>
+            <th>Número do Processo</th>
+            <td th:text="${processo.numeroProcesso}">Número do Processo</td>
+        </tr>
+        <tr>
+            <th>Classe</th>
+            <td th:text="${processo.classe}">Classe</td>
+        </tr>
+        <tr>
+            <th>Sistema</th>
+            <td th:text="${processo.sistema}">Sistema</td>
+        </tr>
+        <tr>
+            <th>Formato</th>
+            <td th:text="${processo.formato}">Formato</td>
+        </tr>
+        <tr>
+            <th>Tribunal</th>
+            <td th:text="${processo.tribunal}">Tribunal</td>
+        </tr>
+        <tr>
+            <th>Data e Hora da Última Atualização</th>
+            <td th:text="${#dates.format(processo.dataHoraUltimaAtualizacao, 'dd-MM-yyyy, HH:mm')}">Data e Hora da
+                Última Atualização</td>
+        </tr>
+        <tr>
+            <th>Grau</th>
+            <td th:text="${processo.grau}">Grau</td>
+        </tr>
+        <tr>
+            <th>Data de Ajuizamento</th>
+            <td th:text="${#dates.format(processo.dataAjuizamento, 'dd-MM-yyyy, HH:mm')}">Data de Ajuizamento</td>
+        </tr>
+        <tr>
+            <th>Movimentos</th>
+            <td>
+                <ul>
+                    <li th:each="movimento : ${processo.movimentos}">
+                        <strong>Nome:</strong> <span th:text="${movimento.nome}">Nome do Movimento</span><br>
+                        <strong>Data e Hora:</strong> <span
+                            th:text="${#dates.format(movimento.dataHora, 'dd-MM-yyyy, HH:mm')}">Data e Hora do
+                            Movimento</span><br>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <td th:text="${processo.id}">ID</td>
+        </tr>
+        <tr>
+            <th>Nível de Sigilo</th>
+            <td th:text="${processo.nivelSigilo}">Nível de Sigilo</td>
+        </tr>
+        <tr>
+            <th>Órgão Julgador</th>
+            <td th:text="${processo.orgaoJulgador}">Órgão Julgador</td>
+        </tr>
+        <tr>
+            <th>Assuntos</th>
+            <td th:text="${processo.assuntos}">Assuntos</td>
+        </tr>
+    </table>
+</body>
+
+</html>
