@@ -1,14 +1,12 @@
-# Usar uma imagem base com JDK
-FROM openjdk:17-jdk-alpine
-
-# Definir o diretório de trabalho dentro do contêiner
+# Etapa 1: Build
+FROM maven:3.8.4-openjdk-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copiar o arquivo JAR para o contêiner
-COPY target/ms-email-0.0.1-SNAPSHOT.jar app.jar
-
-# Expor a porta que a aplicação usa
+# Etapa 2: Run
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/ms-email-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Definir o comando para executar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
